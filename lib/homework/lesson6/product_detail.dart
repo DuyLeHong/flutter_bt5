@@ -9,20 +9,20 @@ class ProductDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Stack(
             children: [
-              Stack(
-                children: [
-                  Image.network(
-                    product.image,
-                    height: 500,
-                    fit: BoxFit.fill,
-                  ),
-                  Container(
+              Image.network(
+                product.image,
+                height: 500,
+                fit: BoxFit.fill,
+              ),
+              Positioned(
+                  top: 30,
+                  child: Container(
                     margin: const EdgeInsets.all(16),
                     child: IconButton(
                         onPressed: () {
@@ -32,26 +32,26 @@ class ProductDetail extends StatelessWidget {
                           Icons.arrow_back,
                           color: Colors.white,
                         )),
-                  ),
-                  Positioned(
-                      bottom: 24,
-                      left: 24,
-                      child: Text(
-                        product.name,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 20),
-                      ))
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Text(
-                product.price,
-                style: const TextStyle(color: Colors.black, fontSize: 50),
-              )
+                  )),
+              Positioned(
+                  bottom: 24,
+                  left: 24,
+                  child: Text(
+                    product.name,
+                    style:
+                    const TextStyle(color: Colors.white, fontSize: 20),
+                  ))
             ],
           ),
-        ));
+          const SizedBox(
+            height: 16,
+          ),
+          Text(
+            product.price,
+            style: const TextStyle(color: Colors.black, fontSize: 50),
+          )
+        ],
+      ),
+    );
   }
 }

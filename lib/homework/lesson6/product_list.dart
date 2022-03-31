@@ -74,9 +74,9 @@ class ListProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView(
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+    return GridView.count(
+        childAspectRatio: 3 / 2,
+        crossAxisCount: 2,
         children: [
           for (int i = 0; i < listProduct.length; i++)
             InkWell(
@@ -110,6 +110,9 @@ class _ProductItemState extends State<ProductItem> {
 
   @override
   Widget build(BuildContext context) {
+    
+    var screenSize = MediaQuery.of(context).size;
+
     return Container(
       alignment: Alignment.center,
       margin: EdgeInsets.all(8),
@@ -120,10 +123,11 @@ class _ProductItemState extends State<ProductItem> {
             borderRadius: BorderRadius.circular(16.0),
             child: Image.network(
               product.image,
-              height: 300.0,
-              fit: BoxFit.fill,
+              width: screenSize.width / 2.0 - 16,
+              fit: BoxFit.cover,
             ),
           ),
+
           Container(
             decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.7),
@@ -152,7 +156,7 @@ class _ProductItemState extends State<ProductItem> {
                         fontStyle: FontStyle.normal,
                         fontSize: 14),
                   ),
-                  flex: 1,
+                  //flex: 1,
                 ),
                 IconButton(
                   icon: const Icon(
