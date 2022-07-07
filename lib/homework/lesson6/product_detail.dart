@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'Product.dart';
 
 class ProductDetail extends StatelessWidget {
+  //const ProductDetail(Product _product, {Key? key}) : super(key: key);
+
   Product product;
 
   ProductDetail(this.product, {Key? key}) : super(key: key);
@@ -54,4 +56,5 @@ class ProductDetail extends StatelessWidget {
       ),
     );
   }
+
 }

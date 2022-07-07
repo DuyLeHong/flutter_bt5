@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
                 onPressed: () {}),
             IconButton(
                 icon: const Icon(
-                  Icons.shopping_cart,
+                  Icons.add_shopping_cart,
                   color: Colors.white,
                 ),
                 onPressed: () {})
@@ -53,12 +53,12 @@ class _MyAppState extends State<MyApp> {
 
 final List<Product> listProduct = [
   Product(
-      "Quần jean",
+      "Quần jeannnnnnnnnnnnn",
       "https://cdn.shopify.com/s/files/1/0268/7841/0824/products/1053SS-white_1900x_crop_center_141b7f52-8fcb-4127-8025-3a27fcb314e8_720x.jpg?v=1618506001",
       "\$5.6",
       false),
   Product(
-      "Áo kitty",
+      "Áo kittyyyyyyyyyyyy",
       "https://i.ebayimg.com/images/g/scAAAOSw10tgkxBI/s-l300.jpg",
       "\$9.8",
       false),
@@ -80,16 +80,27 @@ class ListProduct extends StatelessWidget {
         children: [
           for (int i = 0; i < listProduct.length; i++)
             InkWell(
+              child: ProductItem(
+                product: listProduct[i],
+              ),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (c) => ProductDetail(listProduct[i])));
-              }, // Handle your callback
-              child: ProductItem(
-                product: listProduct[i],
-              ),
+              },
             )
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (c) => ProductDetail(listProduct[i])));
+          //   }, // Handle your callback
+          //   child: ProductItem(
+          //     product: listProduct[i],
+          //   ),
+          // )
         ]);
   }
 }
@@ -110,7 +121,6 @@ class _ProductItemState extends State<ProductItem> {
 
   @override
   Widget build(BuildContext context) {
-    
     var screenSize = MediaQuery.of(context).size;
 
     return Container(
@@ -124,10 +134,10 @@ class _ProductItemState extends State<ProductItem> {
             child: Image.network(
               product.image,
               width: screenSize.width / 2.0 - 16,
-              fit: BoxFit.cover,
+              //width: 200,
+              fit: BoxFit.fitWidth,
             ),
           ),
-
           Container(
             decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.7),
@@ -139,7 +149,7 @@ class _ProductItemState extends State<ProductItem> {
               children: [
                 IconButton(
                   icon: Icon(
-                    product.favorite ? Icons.favorite : Icons.favorite_border,
+                    getFavoriteIcon(),
                     color: Color(0xFF9F28B4),
                   ),
                   onPressed: () {
@@ -151,6 +161,7 @@ class _ProductItemState extends State<ProductItem> {
                 Expanded(
                   child: Text(
                     product.name,
+                    maxLines: 1,
                     style: const TextStyle(
                         color: Colors.white,
                         fontStyle: FontStyle.normal,
@@ -171,5 +182,13 @@ class _ProductItemState extends State<ProductItem> {
         ],
       ),
     );
+  }
+
+  IconData? getFavoriteIcon() {
+    if (product.favorite) {
+      return Icons.favorite;
+    } else {
+      return Icons.favorite_border;
+    }
   }
 }
